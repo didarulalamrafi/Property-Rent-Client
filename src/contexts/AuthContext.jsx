@@ -144,7 +144,6 @@ export function AuthProvider({ children }) {
     const result = await signInWithPopup(auth, googleProvider);
     const firebaseUser = result.user;
     const idToken = await firebaseUser.getIdToken();
-
     const res = await axiosInstance.post("/auth/google", { idToken });
     const { user: userData, token: userToken } = res.data.data;
 
