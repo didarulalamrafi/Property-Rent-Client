@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${poppins.variable}`}
+      className={`${inter.variable} ${poppins.variable}`}
       suppressHydrationWarning
     >
       <body className="antialiased">

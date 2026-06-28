@@ -70,11 +70,26 @@ const sidebarConfig = {
   },
 };
 
-// Accent colors per role, used for the active-link state and avatar ring
+// Accent colors per role — light-theme variants
 const accentMap = {
-  primary: { text: "text-blue-400", bg: "bg-blue-500/10", bar: "bg-blue-400" },
-  warning: { text: "text-amber-400", bg: "bg-amber-500/10", bar: "bg-amber-400" },
-  danger: { text: "text-red-400", bg: "bg-red-500/10", bar: "bg-red-400" },
+  primary: {
+    text: "text-blue-600",
+    bg: "bg-blue-50",
+    bar: "bg-blue-500",
+    chip: "primary",
+  },
+  warning: {
+    text: "text-amber-600",
+    bg: "bg-amber-50",
+    bar: "bg-amber-500",
+    chip: "warning",
+  },
+  danger: {
+    text: "text-red-600",
+    bg: "bg-red-50",
+    bar: "bg-red-500",
+    chip: "danger",
+  },
 };
 
 export default function DashboardSidebar({ role }) {
@@ -94,20 +109,19 @@ export default function DashboardSidebar({ role }) {
   return (
     <aside
       className={cn(
-        "hidden md:flex flex-col h-[calc(100vh-64px)] sticky top-16 bg-gray-900 border-r border-gray-800 rounded-xl transition-all duration-300 relative",
-        collapsed ? "w-20" : "w-64"
+        "hidden md:flex flex-col h-[calc(100vh-64px)] sticky top-16 bg-white border-r border-gray-200 rounded-xl transition-all duration-300 relative shadow-sm",
+        collapsed ? "w-20" : "w-64",
       )}
     >
-      {/* Collapse toggle — lives directly on <aside> (no overflow here) so it
-          isn't clipped when it pokes outside the right edge */}
+      {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed((c) => !c)}
-        className="absolute -right-3 top-6 w-6 h-6 bg-gray-800 border border-gray-700 rounded-full flex items-center justify-center shadow-md hover:bg-gray-700 transition-colors z-10"
+        className="absolute -right-3 top-6 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors z-10"
       >
         {collapsed ? (
-          <TbChevronRight className="w-3.5 h-3.5 text-gray-300" />
+          <TbChevronRight className="w-3.5 h-3.5 text-gray-500" />
         ) : (
-          <TbChevronLeft className="w-3.5 h-3.5 text-gray-300" />
+          <TbChevronLeft className="w-3.5 h-3.5 text-gray-500" />
         )}
       </button>
 
@@ -115,8 +129,8 @@ export default function DashboardSidebar({ role }) {
         {/* User profile summary */}
         <div
           className={cn(
-            "flex items-center gap-3 p-3 mb-6 rounded-2xl bg-gray-800/60 border border-gray-800",
-            collapsed && "justify-center p-2.5"
+            "flex items-center gap-3 p-3 mb-6 rounded-2xl bg-gray-50 border border-gray-100",
+            collapsed && "justify-center p-2.5",
           )}
         >
           <Avatar
@@ -129,7 +143,7 @@ export default function DashboardSidebar({ role }) {
           />
           {!collapsed && (
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-white truncate leading-tight">
+              <p className="text-sm font-semibold text-gray-800 truncate leading-tight">
                 {user?.name}
               </p>
               <Chip
@@ -147,7 +161,7 @@ export default function DashboardSidebar({ role }) {
         {/* Navigation links */}
         <nav className="space-y-1">
           {!collapsed && (
-            <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider px-3 mb-2">
+            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">
               Navigation
             </p>
           )}
@@ -166,15 +180,15 @@ export default function DashboardSidebar({ role }) {
                   "relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors duration-150",
                   isActive
                     ? cn(accent.bg, accent.text)
-                    : "text-gray-400 hover:text-gray-100 hover:bg-gray-800/70",
-                  collapsed && "justify-center px-2"
+                    : "text-gray-500 hover:text-gray-800 hover:bg-gray-100",
+                  collapsed && "justify-center px-2",
                 )}
               >
                 {isActive && (
                   <span
                     className={cn(
                       "absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-full",
-                      accent.bar
+                      accent.bar,
                     )}
                   />
                 )}
@@ -185,17 +199,16 @@ export default function DashboardSidebar({ role }) {
           })}
         </nav>
 
-        {/* Spacer pushes bottom actions down only as far as needed */}
         <div className="flex-1" />
 
         {/* Bottom actions */}
-        <div className="border-t border-gray-800 pt-3 space-y-1">
+        <div className="border-t border-gray-100 pt-3 space-y-1">
           <Link
             href="/"
             title={collapsed ? "Home" : undefined}
             className={cn(
-              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-100 hover:bg-gray-800/70 transition-colors duration-150",
-              collapsed && "justify-center px-2"
+              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-colors duration-150",
+              collapsed && "justify-center px-2",
             )}
           >
             <TbHome className="w-5 h-5 flex-shrink-0" />
@@ -205,8 +218,8 @@ export default function DashboardSidebar({ role }) {
             onClick={handleLogout}
             title={collapsed ? "Logout" : undefined}
             className={cn(
-              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors duration-150 w-full",
-              collapsed && "justify-center px-2"
+              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-50 transition-colors duration-150 w-full",
+              collapsed && "justify-center px-2",
             )}
           >
             <TbLogout className="w-5 h-5 flex-shrink-0" />

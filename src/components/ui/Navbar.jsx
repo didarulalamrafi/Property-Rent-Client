@@ -79,8 +79,8 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "bg-gray-950/90 backdrop-blur-md shadow-sm border-b border-gray-800"
-            : "bg-gray-950/90"
+            ? "bg-gray-900/80 backdrop-blur-md shadow-sm border-b border-gray-800"
+            : "bg-gray-900/80",
         )}
       >
         <div className="section-container">
@@ -105,7 +105,7 @@ export default function Navbar() {
                     "flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
                     pathname === link.href
                       ? "text-blue-400 bg-blue-900/20"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800",
                   )}
                 >
                   <link.icon className="w-4 h-4" />
@@ -258,7 +258,7 @@ export default function Navbar() {
                     "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors",
                     pathname === link.href
                       ? "text-blue-400 bg-blue-900/20"
-                      : "text-gray-300 hover:bg-gray-800"
+                      : "text-gray-300 hover:bg-gray-800",
                   )}
                 >
                   <link.icon className="w-5 h-5" />
