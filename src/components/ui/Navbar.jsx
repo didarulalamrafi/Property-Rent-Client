@@ -29,6 +29,7 @@ import {
 } from "react-icons/tb";
 import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
+import { BiBuilding } from "react-icons/bi";
 
 const navLinks = [
   { label: "Home", href: "/", icon: TbHome },
@@ -79,15 +80,15 @@ export default function Navbar() {
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
             ? "bg-gray-950/90 backdrop-blur-md shadow-sm border-b border-gray-800"
-            : "bg-transparent"
+            : "bg-gray-950/90"
         )}
       >
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-sm group-hover:shadow-md transition-shadow">
-                <TbBuildingEstate className="w-5 h-5 text-white" />
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-pink-600 rounded-xl shadow-sm group-hover:shadow-md transition-shadow">
+                <BiBuilding className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white font-heading">
                 Thikana

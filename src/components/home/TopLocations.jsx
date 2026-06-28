@@ -10,46 +10,46 @@ import axiosInstance from "@/lib/axios";
 
 const fallbackLocations = [
   {
-    location: "New York",
+    location: "Dhaka",
     count: 120,
-    avgPrice: 3500,
+    avgPrice: 25000,
     sampleImage:
-      "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=400&q=80",
+      "https://images.unsplash.com/photo-1598430772299-8c854b769e68?w=400&q=80",
   },
   {
-    location: "Los Angeles",
+    location: "Chittagong",
     count: 98,
-    avgPrice: 2800,
+    avgPrice: 18000,
     sampleImage:
-      "https://images.unsplash.com/photo-1592201533886-b8a3e1f348a8?w=400&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80",
   },
   {
-    location: "Chicago",
+    location: "Sylhet",
     count: 76,
-    avgPrice: 2200,
+    avgPrice: 12000,
     sampleImage:
-      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80",
+      "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=400&q=80",
   },
   {
-    location: "Miami",
+    location: "Cox's Bazar",
     count: 65,
-    avgPrice: 2600,
+    avgPrice: 15000,
     sampleImage:
-      "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=400&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80",
   },
   {
-    location: "Seattle",
+    location: "Rajshahi",
     count: 54,
-    avgPrice: 2400,
+    avgPrice: 10000,
     sampleImage:
-      "https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=400&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80",
   },
   {
-    location: "Austin",
+    location: "Khulna",
     count: 43,
-    avgPrice: 1900,
+    avgPrice: 9000,
     sampleImage:
-      "https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=400&q=80",
+      "https://images.unsplash.com/photo-1546587348-d12660c30c50?w=400&q=80",
   },
 ];
 
@@ -76,7 +76,7 @@ export default function TopLocations() {
   };
 
   return (
-    <section className="section-padding bg-white dark:bg-gray-950">
+    <section className="section-padding bg-white">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -85,15 +85,15 @@ export default function TopLocations() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3">
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-600 mb-3">
             <TbMapPin className="w-4 h-4" />
             Top Destinations
           </span>
-          <h2 className="section-title">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
             Explore by{" "}
             <span className="gradient-text">Location</span>
           </h2>
-          <p className="section-subtitle">
+          <p className="text-gray-500 text-base max-w-xl mx-auto">
             Browse properties in the most popular cities and neighborhoods.
           </p>
         </motion.div>
@@ -125,12 +125,12 @@ export default function TopLocations() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
-                <p className="text-white font-semibold text-sm font-heading">
+                <p className="text-white font-semibold text-sm">
                   {loc.location}
                 </p>
                 <div className="flex items-center gap-1 mt-0.5">
-                  <TbBuildingSkyscraper className="w-3 h-3 text-blue-300" />
-                  <span className="text-blue-200 text-xs">
+                  <TbBuildingSkyscraper className="w-3 h-3 text-violet-300" />
+                  <span className="text-violet-200 text-xs">
                     {loc.count} properties
                   </span>
                 </div>

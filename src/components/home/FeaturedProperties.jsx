@@ -31,10 +31,9 @@ const cardVariants = {
 export default function FeaturedProperties() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [itemsPerPage, setItemsPerPage] = useState(2); // default desktop
+  const [itemsPerPage, setItemsPerPage] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Backend থেকে একবারে সব (৬টা) property fetch
   useEffect(() => {
     axiosInstance
       .get("/properties/featured")
@@ -43,13 +42,12 @@ export default function FeaturedProperties() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Screen size অনুযায়ী itemsPerPage সেট করা — mobile: 1, desktop (sm এবং তার উপরে): 2
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 640px)");
 
     const updateItemsPerPage = (matches) => {
       setItemsPerPage(matches ? 2 : 1);
-      setCurrentPage(1); // resize হলে পেজ ১-এ রিসেট
+      setCurrentPage(1);
     };
 
     updateItemsPerPage(mq.matches);
@@ -72,8 +70,9 @@ export default function FeaturedProperties() {
   };
 
   return (
-    <section className="section-padding bg-gray-50 dark:bg-gray-900/50">
+    <section className="section-padding bg-white">
       <div className="section-container">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -87,7 +86,7 @@ export default function FeaturedProperties() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-500 mb-3"
           >
             <motion.span
               animate={{ rotate: [0, 15, -15, 0] }}
@@ -102,11 +101,11 @@ export default function FeaturedProperties() {
             </motion.span>
             Featured Listings
           </motion.span>
-          <h2 className="section-title">
+          <h2 className="section-title text-gray-900">
             Handpicked{" "}
             <span className="gradient-text">Properties</span>
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle text-gray-500">
             Explore our top-rated rental properties, carefully selected for
             quality, location, and value.
           </p>
@@ -125,6 +124,10 @@ export default function FeaturedProperties() {
                 <PropertyCardSkeleton />
               </motion.div>
             ))}
+          </div>
+        ) : properties.length === 0 ? (
+          <div className="text-center py-16 text-gray-400">
+            <p className="text-lg font-medium">No featured properties found.</p>
           </div>
         ) : (
           <AnimatePresence mode="wait">
@@ -150,7 +153,7 @@ export default function FeaturedProperties() {
           </AnimatePresence>
         )}
 
-        {/* Pagination controls */}
+        {/* Pagination */}
         {!loading && totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-10">
             <Button
@@ -159,6 +162,7 @@ export default function FeaturedProperties() {
               size="sm"
               isDisabled={currentPage === 1}
               onPress={() => handlePageChange(currentPage - 1)}
+              className="border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-500"
             >
               <TbChevronLeft className="w-4 h-4" />
             </Button>
@@ -174,7 +178,7 @@ export default function FeaturedProperties() {
                   className={
                     pageNum === currentPage
                       ? "btn-gradient text-white"
-                      : ""
+                      : "border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-500"
                   }
                   onPress={() => handlePageChange(pageNum)}
                 >
@@ -189,6 +193,7 @@ export default function FeaturedProperties() {
               size="sm"
               isDisabled={currentPage === totalPages}
               onPress={() => handlePageChange(currentPage + 1)}
+              className="border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-500"
             >
               <TbChevronRight className="w-4 h-4" />
             </Button>
@@ -226,10 +231,11 @@ export default function FeaturedProperties() {
               }
               className="font-semibold btn-gradient text-white px-8"
             >
-              View All Properties
+              Show All Properties
             </Button>
           </motion.div>
         </motion.div>
+
       </div>
     </section>
   );

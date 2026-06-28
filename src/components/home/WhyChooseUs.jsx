@@ -17,7 +17,7 @@ const features = [
     title: "Verified Properties",
     description:
       "Every property is reviewed and approved by our admin team to ensure authenticity and quality.",
-    bg: "bg-blue-50 dark:bg-blue-900/20",
+    bg: "bg-blue-50",
     color: "text-blue-500",
   },
   {
@@ -25,7 +25,7 @@ const features = [
     title: "Smart Search",
     description:
       "Advanced filters by location, type, price, and amenities help you find exactly what you need.",
-    bg: "bg-purple-50 dark:bg-purple-900/20",
+    bg: "bg-purple-50",
     color: "text-purple-500",
   },
   {
@@ -33,7 +33,7 @@ const features = [
     title: "Secure Payments",
     description:
       "Powered by Stripe. Your payment data is encrypted and never stored on our servers.",
-    bg: "bg-green-50 dark:bg-green-900/20",
+    bg: "bg-green-50",
     color: "text-green-500",
   },
   {
@@ -41,7 +41,7 @@ const features = [
     title: "24/7 Support",
     description:
       "Our dedicated support team is available around the clock to help you with any issues.",
-    bg: "bg-orange-50 dark:bg-orange-900/20",
+    bg: "bg-orange-50",
     color: "text-orange-500",
   },
   {
@@ -49,7 +49,7 @@ const features = [
     title: "Honest Reviews",
     description:
       "Real reviews from verified tenants help you make informed decisions before booking.",
-    bg: "bg-yellow-50 dark:bg-yellow-900/20",
+    bg: "bg-yellow-50",
     color: "text-amber-500",
   },
   {
@@ -57,15 +57,16 @@ const features = [
     title: "Prime Locations",
     description:
       "Properties in the most sought-after neighborhoods across major cities nationwide.",
-    bg: "bg-red-50 dark:bg-red-900/20",
+    bg: "bg-red-50",
     color: "text-red-500",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="section-padding bg-white dark:bg-gray-950">
+    <section className="section-padding bg-[#fafafa]">
       <div className="section-container">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,14 +75,14 @@ export default function WhyChooseUs() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3 uppercase tracking-wider">
+          <span className="inline-block text-sm font-semibold text-indigo-500 mb-3 uppercase tracking-wider">
             Why Thikana
           </span>
-          <h2 className="section-title mb-4">
+          <h2 className="section-title text-gray-900 mb-4">
             The Smarter Way to{" "}
             <span className="gradient-text">Rent</span>
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle text-gray-500">
             We combine technology, trust, and transparency to make renting as
             simple as possible.
           </p>
@@ -97,7 +98,7 @@ export default function WhyChooseUs() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
               whileHover={{ y: -4 }}
-              className="card-base p-6 group"
+              className="bg-white border border-gray-100 rounded-2xl p-6 group shadow-sm hover:shadow-md hover:border-indigo-100 transition-all duration-300"
             >
               {/* Icon */}
               <div
@@ -106,15 +107,16 @@ export default function WhyChooseUs() {
                 <feature.icon className={`w-6 h-6 ${feature.color}`} />
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 font-heading">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 font-heading">
                 {feature.title}
               </h3>
-              <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-500 text-sm leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

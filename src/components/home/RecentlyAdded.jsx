@@ -23,25 +23,25 @@ export default function RecentlyAdded() {
   }, []);
 
   return (
-    <section className="section-padding bg-gray-50 dark:bg-gray-900/50">
+    <section className="section-padding bg-gray-50">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
+          className="flex flex-col items-center text-center gap-4 mb-12"
         >
           <div>
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3">
+            <span className="inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-violet-600 mb-3">
               <TbClock className="w-4 h-4" />
               Just Listed
             </span>
-            <h2 className="section-title">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
               Recently{" "}
               <span className="gradient-text">Added</span>
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-lg">
+            <p className="text-gray-500 mt-2 max-w-lg mx-auto">
               Fresh listings added this week. Be the first to discover your
               next home.
             </p>
@@ -51,7 +51,7 @@ export default function RecentlyAdded() {
             href="/properties?sort=newest"
             variant="bordered"
             endContent={<TbArrowRight className="w-4 h-4" />}
-            className="font-semibold flex-shrink-0"
+            className="font-semibold flex-shrink-0 text-gray-700 border-gray-300"
           >
             See All New
           </Button>
