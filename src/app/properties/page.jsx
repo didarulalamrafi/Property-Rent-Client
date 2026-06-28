@@ -4,7 +4,7 @@ import Footer from "@/components/ui/Footer";
 import AllPropertiesClient from "@/components/property/AllPropertiesClient";
 
 export const metadata = {
-  title: "All Properties — RentEasy",
+  title: "All Properties — Thikana",
   description:
     "Browse all available rental properties. Filter by location, type, and price.",
 };

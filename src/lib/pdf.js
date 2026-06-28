@@ -32,7 +32,7 @@ export async function generateBookingSummaryPDF(booking) {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
   doc.setFont("helvetica", "bold");
-  doc.text("RentEasy", margin, 20);
+  doc.text("Thikana", margin, 20);
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
   doc.text("Booking Confirmation", margin, 30);
@@ -214,7 +214,7 @@ export async function generateBookingSummaryPDF(booking) {
   doc.setFont("helvetica", "normal");
   doc.setTextColor(107, 114, 128);
   doc.text(
-    "This is an auto-generated booking confirmation from RentEasy.",
+    "This is an auto-generated booking confirmation from Thikana.",
     pageWidth / 2,
     pageHeight - 14,
     { align: "center" }
@@ -242,7 +242,7 @@ export async function generateEarningsPDF(transactions, ownerName, period) {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
   doc.setFont("helvetica", "bold");
-  doc.text("RentEasy", margin, 18);
+  doc.text("Thikana", margin, 18);
 
   doc.setFontSize(11);
   doc.setFont("helvetica", "normal");
@@ -321,7 +321,7 @@ export async function generateEarningsPDF(transactions, ownerName, period) {
   doc.setFont("helvetica", "normal");
   doc.setTextColor(107, 114, 128);
   doc.text(
-    "Confidential — RentEasy Earnings Report",
+    "Confidential — Thikana Earnings Report",
     pageWidth / 2,
     pageHeight - 8,
     { align: "center" }

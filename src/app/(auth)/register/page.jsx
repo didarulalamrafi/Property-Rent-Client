@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import RegisterForm from "@/components/auth/RegisterForm";
 
 export const metadata = {
-  title: "Register — RentEasy",
-  description: "Create your RentEasy account",
+  title: "Register — Thikana",
+  description: "Create your Thikana account",
 };
 
 export default function RegisterPage() {

@@ -43,7 +43,7 @@ export default function Footer() {
                 <TbBuildingEstate className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white font-heading">
-                RentEasy
+                Thikana
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-xs">
@@ -54,7 +54,7 @@ export default function Footer() {
             <div className="space-y-2.5">
               <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <TbMail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>hello@renteasy.com</span>
+                <span>hello@thikana.com</span>
               </div>
               <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <TbPhone className="w-4 h-4 text-blue-400 flex-shrink-0" />
@@ -68,7 +68,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-2.5 mt-6">
               <a
-                href="https://x.com/renteasy"
+                href="https://x.com/Thikana"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X"
@@ -77,7 +77,7 @@ export default function Footer() {
                 <TbBrandX className="w-4 h-4" />
               </a>
               <a
-                href="https://facebook.com/renteasy"
+                href="https://facebook.com/Thikana"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -86,7 +86,7 @@ export default function Footer() {
                 <TbBrandFacebook className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com/renteasy"
+                href="https://instagram.com/Thikana"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -95,7 +95,7 @@ export default function Footer() {
                 <TbBrandInstagram className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com/company/renteasy"
+                href="https://linkedin.com/company/Thikana"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -129,7 +129,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} RentEasy. All rights reserved.
+            © {new Date().getFullYear()} Thikana. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link

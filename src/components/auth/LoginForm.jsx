@@ -238,7 +238,7 @@ export default function LoginForm() {
           <div className="space-y-1 text-xs text-gray-400">
             <p>
               <strong className="text-gray-500">Admin:</strong>{" "}
-              admin@renteasy.com / Admin123
+              admin@thikana.com / Admin123
             </p>
             <p>For Google login default role is TENANT</p>
           </div>

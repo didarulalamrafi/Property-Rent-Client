@@ -3,7 +3,7 @@ import PaymentSuccessClient from "@/components/payment/PaymentSuccessClient";
 import Navbar from "@/components/ui/Navbar";
 
 export const metadata = {
-  title: "Payment Successful — RentEasy",
+  title: "Payment Successful — Thikana",
 };
 
 export default function PaymentSuccessPage() {

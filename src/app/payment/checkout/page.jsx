@@ -3,7 +3,7 @@ import CheckoutClient from "@/components/payment/CheckoutClient";
 import Navbar from "@/components/ui/Navbar";
 
 export const metadata = {
-  title: "Secure Checkout — RentEasy",
+  title: "Secure Checkout — Thikana",
   description: "Complete your property booking with secure Stripe payment.",
 };
 

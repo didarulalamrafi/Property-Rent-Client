@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
           className="text-center mb-16"
         >
           <span className="inline-block text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3 uppercase tracking-wider">
-            Why RentEasy
+            Why Thikana
           </span>
           <h2 className="section-title mb-4">
             The Smarter Way to{" "}

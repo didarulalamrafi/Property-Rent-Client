@@ -24,7 +24,7 @@ export function FullPageLoader({ message = "Loading..." }) {
         </div>
         <div className="flex flex-col items-center gap-1">
           <p className="text-base font-semibold text-gray-900 dark:text-white font-heading">
-            RentEasy
+            Thikana
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {message}

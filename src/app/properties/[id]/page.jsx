@@ -4,7 +4,7 @@ import Footer from "@/components/ui/Footer";
 import PropertyDetailsClient from "@/components/property/PropertyDetailsClient";
 
 export const metadata = {
-  title: "Property Details — RentEasy",
+  title: "Property Details — Thikana",
 };
 
 export default async function PropertyDetailsPage({ params }) {

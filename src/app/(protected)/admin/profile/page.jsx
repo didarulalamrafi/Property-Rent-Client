@@ -2,7 +2,7 @@
 // Admin profile reuses the shared profile client
 import TenantProfileClient from "@/components/dashboard/tenant/TenantProfileClient";
 
-export const metadata = { title: "Admin Profile — RentEasy" };
+export const metadata = { title: "Admin Profile — Thikana" };
 
 export default function AdminProfilePage() {
   return <TenantProfileClient />;

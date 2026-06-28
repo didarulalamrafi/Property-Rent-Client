@@ -17,7 +17,7 @@ export default function AuthLayout({ children }) {
               <TbBuildingEstate className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white font-heading">
-              RentEasy
+              Thikana
             </span>
           </Link>
           {children}

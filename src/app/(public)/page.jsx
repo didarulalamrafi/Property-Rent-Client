@@ -11,7 +11,7 @@ import RentalStatistics from "@/components/home/RentalStatistics";
 import TrustedOwners from "@/components/home/TrustedOwners";
 
 export const metadata = {
-  title: "RentEasy — Find Your Perfect Home",
+  title: "Thikana — Find Your Perfect Home",
   description:
     "Discover and book rental properties with ease. Browse apartments, houses, villas, and more.",
 };

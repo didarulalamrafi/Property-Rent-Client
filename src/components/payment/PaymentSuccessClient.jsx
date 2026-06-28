@@ -470,10 +470,10 @@ export default function PaymentSuccessClient() {
         >
           Need help? Contact us at{" "}
           <a 
-            href="mailto:support@renteasy.com"
+            href="mailto:support@thikana.com"
             className="text-blue-500 hover:underline"
           >
-            support@renteasy.com
+            support@thikana.com
           </a>
         </motion.p>
       </div>

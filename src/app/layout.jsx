@@ -18,8 +18,8 @@ const poppins = Poppins({
 
 export const metadata = {
   title: {
-    default: "RentEasy — Find Your Perfect Home",
-    template: "%s | RentEasy",
+    default: "Thikana — Find Your Perfect Home",
+    template: "%s | Thikana",
   },
   description:
     "Discover and book rental properties with ease. Browse apartments, houses, villas, and more. Connect with trusted property owners.",
@@ -29,11 +29,11 @@ export const metadata = {
     "apartments for rent",
     "house rental",
     "booking platform",
-    "renteasy",
+    "Thikana",
   ],
-  authors: [{ name: "RentEasy Team" }],
+  authors: [{ name: "Thikana Team" }],
   openGraph: {
-    title: "RentEasy — Find Your Perfect Home",
+    title: "Thikana — Find Your Perfect Home",
     description: "Discover and book rental properties with ease.",
     type: "website",
     locale: "en_US",

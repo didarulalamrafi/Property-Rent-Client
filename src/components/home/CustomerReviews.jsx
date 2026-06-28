@@ -13,7 +13,7 @@ const fallbackReviews = [
     _id: "1",
     rating: 5,
     comment:
-      "RentEasy made finding my apartment so simple. The platform is intuitive and the properties are exactly as described. Highly recommend!",
+      "Thikana made finding my apartment so simple. The platform is intuitive and the properties are exactly as described. Highly recommend!",
     createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     tenant: { name: "Sarah Chen", photo: null },
     property: { title: "Modern Downtown Apartment", location: "New York" },
@@ -31,7 +31,7 @@ const fallbackReviews = [
     _id: "3",
     rating: 5,
     comment:
-      "I was skeptical at first, but RentEasy exceeded all expectations. Transparent pricing, verified listings, and excellent support.",
+      "I was skeptical at first, but Thikana exceeded all expectations. Transparent pricing, verified listings, and excellent support.",
     createdAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
     tenant: { name: "Emma Williams", photo: null },
     property: { title: "Cozy Studio in SoHo", location: "Los Angeles" },

@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata = {
-  title: "Login — RentEasy",
-  description: "Sign in to your RentEasy account",
+  title: "Login — Thikana",
+  description: "Sign in to your Thikana account",
 };
 
 export default function LoginPage() {

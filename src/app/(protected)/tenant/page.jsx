@@ -112,7 +112,7 @@ export default function TenantHomePage() {
               Welcome back, {user?.name?.split(" ")[0]}! 👋
             </h1>
             <p className="page-description">
-              Here is a summary of your activity on RentEasy.
+              Here is a summary of your activity on Thikana.
             </p>
           </div>
         </div>
