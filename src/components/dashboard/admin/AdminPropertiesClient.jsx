@@ -15,7 +15,6 @@ import {
 } from "@heroui/react";
 import {
   TbCheck,
-  TbX,
   TbEye,
   TbTrash,
   TbSearch,
@@ -23,7 +22,6 @@ import {
   TbHome,
   TbAlertTriangle,
   TbMessageCircle,
-  TbFilter,
 } from "react-icons/tb";
 import axiosInstance from "@/lib/axios";
 import { TableRowSkeleton } from "@/components/ui/SkeletonCard";
@@ -52,29 +50,26 @@ export default function AdminPropertiesClient() {
     limit: 10,
   });
   const [actionLoading, setActionLoading] = useState(null);
-  const [rejectModal, setRejectModal] = useState(null); // property
+  const [rejectModal, setRejectModal] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
-  const [deleteModal, setDeleteModal] = useState(null); // property
+  const [deleteModal, setDeleteModal] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
-  const fetchProperties = useCallback(
-    async (p = 1, s = "", status = "") => {
-      setLoading(true);
-      try {
-        const params = new URLSearchParams({ page: p, limit: 10 });
-        if (s) params.append("search", s);
-        if (status && status !== "all") params.append("status", status);
-        const res = await axiosInstance.get(`/properties/all?${params}`);
-        setProperties(res.data.data.properties || []);
-        setPagination(res.data.data.pagination);
-      } catch {
-        toast.error("Failed to load properties");
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const fetchProperties = useCallback(async (p = 1, s = "", status = "") => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ page: p, limit: 10 });
+      if (s) params.append("search", s);
+      if (status && status !== "all") params.append("status", status);
+      const res = await axiosInstance.get(`/properties/all?${params}`);
+      setProperties(res.data.data.properties || []);
+      setPagination(res.data.data.pagination);
+    } catch {
+      toast.error("Failed to load properties");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchProperties(page, search, statusFilter);
@@ -85,7 +80,7 @@ export default function AdminPropertiesClient() {
       setSearch(val);
       setPage(1);
     }, 500),
-    []
+    [],
   );
 
   const handleApprove = async (id) => {
@@ -93,9 +88,7 @@ export default function AdminPropertiesClient() {
     try {
       await axiosInstance.patch(`/properties/${id}/approve`);
       setProperties((prev) =>
-        prev.map((p) =>
-          p._id === id ? { ...p, status: "approved" } : p
-        )
+        prev.map((p) => (p._id === id ? { ...p, status: "approved" } : p)),
       );
       toast.success("Property approved successfully!");
     } catch (err) {
@@ -117,8 +110,8 @@ export default function AdminPropertiesClient() {
       });
       setProperties((prev) =>
         prev.map((p) =>
-          p._id === rejectModal._id ? { ...p, status: "rejected" } : p
-        )
+          p._id === rejectModal._id ? { ...p, status: "rejected" } : p,
+        ),
       );
       toast.success("Property rejected with feedback");
       setRejectModal(null);
@@ -134,9 +127,7 @@ export default function AdminPropertiesClient() {
     setDeleteLoading(true);
     try {
       await axiosInstance.delete(`/properties/${deleteModal._id}`);
-      setProperties((prev) =>
-        prev.filter((p) => p._id !== deleteModal._id)
-      );
+      setProperties((prev) => prev.filter((p) => p._id !== deleteModal._id));
       setPagination((p) => ({ ...p, total: p.total - 1 }));
       toast.success("Property deleted");
       setDeleteModal(null);
@@ -145,13 +136,6 @@ export default function AdminPropertiesClient() {
     } finally {
       setDeleteLoading(false);
     }
-  };
-
-  const statusCounts = {
-    all: pagination.total,
-    pending: properties.filter((p) => p.status === "pending").length,
-    approved: properties.filter((p) => p.status === "approved").length,
-    rejected: properties.filter((p) => p.status === "rejected").length,
   };
 
   return (
@@ -164,21 +148,22 @@ export default function AdminPropertiesClient() {
             Review, approve, reject, and manage all platform listings
           </p>
         </div>
-        <Button type="button"
+        <Button
+          type="button"
           variant="bordered"
           size="sm"
           startContent={<TbRefresh className="w-4 h-4" />}
           onPress={() => fetchProperties(page, search, statusFilter)}
-          className="font-medium"
+          className="font-medium border-gray-200 text-gray-600 hover:border-gray-300"
         >
           Refresh
         </Button>
       </div>
 
-      {/* Search + filter */}
+      {/* Search */}
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
         <div className="relative flex-1 max-w-md">
-          <TbSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10 pointer-events-none" />
+          <TbSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10 pointer-events-none" />
           <input
             type="text"
             placeholder="Search by title or location..."
@@ -187,8 +172,7 @@ export default function AdminPropertiesClient() {
               setSearchInput(e.target.value);
               debouncedSearch(e.target.value);
             }}
-            className="input-base w-full"
-            style={{ paddingLeft: "2.75rem" }}
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder-gray-400 text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
           />
         </div>
       </div>
@@ -196,7 +180,8 @@ export default function AdminPropertiesClient() {
       {/* Status filter tabs */}
       <div className="flex flex-wrap gap-2 mb-6">
         {STATUS_FILTERS.map((s) => (
-          <button type="button"
+          <button
+            type="button"
             key={s}
             onClick={() => {
               setStatusFilter(s);
@@ -205,7 +190,7 @@ export default function AdminPropertiesClient() {
             className={`px-4 py-2 rounded-xl text-sm font-medium capitalize transition-all ${
               statusFilter === s
                 ? "bg-blue-500 text-white shadow-sm"
-                : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 hover:border-blue-300"
+                : "bg-white text-gray-600 border border-gray-200 hover:border-blue-300 hover:text-blue-500"
             }`}
           >
             {s === "all" ? "All Properties" : s}
@@ -216,20 +201,25 @@ export default function AdminPropertiesClient() {
       {/* Table */}
       <div className="card-base overflow-hidden">
         {loading ? (
-          <div className="table-container">
+          <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="table-head">
+              <thead className="bg-gray-50 border-b border-gray-100">
                 <tr>
-                  {["Property", "Owner", "Type", "Price", "Status", "Actions"].map(
-                    (h) => (
-                      <th
-                        key={h}
-                        className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap"
-                      >
-                        {h}
-                      </th>
-                    )
-                  )}
+                  {[
+                    "Property",
+                    "Owner",
+                    "Type",
+                    "Price",
+                    "Status",
+                    "Actions",
+                  ].map((h) => (
+                    <th
+                      key={h}
+                      className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -250,35 +240,41 @@ export default function AdminPropertiesClient() {
             }
           />
         ) : (
-          <div className="table-container">
+          <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="table-head">
+              <thead className="bg-gray-50 border-b border-gray-100">
                 <tr>
-                  {["Property", "Owner", "Type", "Price", "Status", "Listed", "Actions"].map(
-                    (h) => (
-                      <th
-                        key={h}
-                        className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap"
-                      >
-                        {h}
-                      </th>
-                    )
-                  )}
+                  {[
+                    "Property",
+                    "Owner",
+                    "Type",
+                    "Price",
+                    "Status",
+                    "Listed",
+                    "Actions",
+                  ].map((h) => (
+                    <th
+                      key={h}
+                      className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800">
+              <tbody className="bg-white divide-y divide-gray-100">
                 {properties.map((property, i) => (
                   <motion.tr
                     key={property._id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: i * 0.04 }}
-                    className="table-row"
+                    className="hover:bg-gray-50 transition-colors"
                   >
                     {/* Property */}
-                    <td className="table-cell">
+                    <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="relative w-12 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-700">
+                        <div className="relative w-12 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
                           {property.images?.[0] ? (
                             <Image
                               src={property.images[0]}
@@ -294,7 +290,7 @@ export default function AdminPropertiesClient() {
                           )}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[160px]">
+                          <p className="text-sm font-medium text-gray-900 truncate max-w-[160px]">
                             {property.title}
                           </p>
                           <p className="text-xs text-gray-400 truncate max-w-[140px]">
@@ -305,27 +301,25 @@ export default function AdminPropertiesClient() {
                     </td>
 
                     {/* Owner */}
-                    <td className="table-cell">
-                      <div className="min-w-0">
-                        <p className="text-sm text-gray-700 dark:text-gray-300 truncate max-w-[120px]">
-                          {property.ownerId?.name || property.ownerInfo?.name}
-                        </p>
-                        <p className="text-xs text-gray-400 truncate max-w-[120px]">
-                          {property.ownerId?.email || property.ownerInfo?.email}
-                        </p>
-                      </div>
+                    <td className="px-6 py-4">
+                      <p className="text-sm text-gray-700 truncate max-w-[120px]">
+                        {property.ownerId?.name || property.ownerInfo?.name}
+                      </p>
+                      <p className="text-xs text-gray-400 truncate max-w-[120px]">
+                        {property.ownerId?.email || property.ownerInfo?.email}
+                      </p>
                     </td>
 
                     {/* Type */}
-                    <td className="table-cell">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-6 py-4">
+                      <span className="text-sm text-gray-600">
                         {property.propertyType}
                       </span>
                     </td>
 
                     {/* Price */}
-                    <td className="table-cell">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-semibold text-gray-900">
                         {formatCurrency(property.price)}
                       </p>
                       <p className="text-xs text-gray-400">
@@ -334,44 +328,57 @@ export default function AdminPropertiesClient() {
                     </td>
 
                     {/* Status */}
-                    <td className="table-cell">
+                    <td className="px-6 py-4">
                       <span className={getStatusBadgeClass(property.status)}>
                         {property.status}
                       </span>
                     </td>
 
                     {/* Listed date */}
-                    <td className="table-cell">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                    <td className="px-6 py-4">
+                      <span className="text-sm text-gray-500">
                         {formatDate(property.createdAt)}
                       </span>
                     </td>
 
                     {/* Actions */}
-                    <td className="table-cell">
+                    <td className="px-6 py-4">
                       <div className="flex items-center gap-1">
-                        <Tooltip content="View property">
-                          <Button type="button"
+                        <Tooltip
+                          content="View property"
+                          classNames={{
+                            content: "bg-gray-800 text-white text-xs px-2 py-1",
+                          }}
+                        >
+                          <Button
+                            type="button"
                             isIconOnly
                             size="sm"
                             variant="light"
                             as={Link}
                             href={`/properties/${property._id}`}
-                            className="text-gray-500"
+                            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100"
                           >
                             <TbEye className="w-4 h-4" />
                           </Button>
                         </Tooltip>
 
                         {property.status !== "approved" && (
-                          <Tooltip content="Approve">
-                            <Button type="button"
+                          <Tooltip
+                            content="Approve"
+                            classNames={{
+                              content:
+                                "bg-gray-800 text-white text-xs px-2 py-1",
+                            }}
+                          >
+                            <Button
+                              type="button"
                               isIconOnly
                               size="sm"
                               variant="flat"
-                              color="success"
                               isLoading={actionLoading === property._id}
                               onPress={() => handleApprove(property._id)}
+                              className="text-green-700 bg-green-50 hover:bg-green-100"
                             >
                               <TbCheck className="w-4 h-4" />
                             </Button>
@@ -379,30 +386,43 @@ export default function AdminPropertiesClient() {
                         )}
 
                         {property.status !== "rejected" && (
-                          <Tooltip content="Reject with feedback">
-                            <Button type="button"
+                          <Tooltip
+                            content="Reject with feedback"
+                            classNames={{
+                              content:
+                                "bg-gray-800 text-white text-xs px-2 py-1",
+                            }}
+                          >
+                            <Button
+                              type="button"
                               isIconOnly
                               size="sm"
                               variant="flat"
-                              color="warning"
                               isLoading={actionLoading === property._id}
                               onPress={() => {
                                 setRejectModal(property);
                                 setRejectReason("");
                               }}
+                              className="text-orange-700 bg-orange-50 hover:bg-orange-100"
                             >
                               <TbMessageCircle className="w-4 h-4" />
                             </Button>
                           </Tooltip>
                         )}
 
-                        <Tooltip content="Delete property">
-                          <Button type="button"
+                        <Tooltip
+                          content="Delete property"
+                          classNames={{
+                            content: "bg-gray-800 text-white text-xs px-2 py-1",
+                          }}
+                        >
+                          <Button
+                            type="button"
                             isIconOnly
                             size="sm"
                             variant="flat"
-                            color="danger"
                             onPress={() => setDeleteModal(property)}
+                            className="text-red-600 bg-red-50 hover:bg-red-100"
                           >
                             <TbTrash className="w-4 h-4" />
                           </Button>
@@ -418,26 +438,28 @@ export default function AdminPropertiesClient() {
 
         {/* Pagination */}
         {!loading && pagination.pages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100 dark:border-gray-800">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100">
+            <p className="text-sm text-gray-500">
               {pagination.total} total properties
             </p>
             <div className="flex gap-2">
-              <Button type="button"
+              <Button
+                type="button"
                 size="sm"
                 variant="bordered"
                 isDisabled={page <= 1}
                 onPress={() => setPage((p) => p - 1)}
-                className="font-medium"
+                className="font-medium border-gray-200 text-gray-600"
               >
                 Previous
               </Button>
-              <Button type="button"
+              <Button
+                type="button"
                 size="sm"
                 variant="bordered"
                 isDisabled={page >= pagination.pages}
                 onPress={() => setPage((p) => p + 1)}
-                className="font-medium"
+                className="font-medium border-gray-200 text-gray-600"
               >
                 Next
               </Button>
@@ -454,28 +476,30 @@ export default function AdminPropertiesClient() {
           setRejectReason("");
         }}
         size="md"
-        classNames={{ backdrop: "backdrop-blur-sm", base: "card-base" }}
+        classNames={{
+          backdrop: "backdrop-blur-sm",
+          base: "bg-white shadow-xl rounded-2xl",
+        }}
       >
         <ModalContent>
-          <ModalHeader className="font-heading text-lg text-orange-600 dark:text-orange-400 border-b border-gray-100 dark:border-gray-800 pb-4">
+          <ModalHeader className="font-heading text-lg text-orange-600 border-b border-gray-100 pb-4">
             Reject Property
           </ModalHeader>
           <ModalBody className="py-6">
             {rejectModal && (
               <div className="space-y-4">
-                <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50">
+                <div className="p-3 rounded-xl bg-gray-50 border border-gray-100">
                   <p className="text-xs text-gray-400 mb-0.5">Property</p>
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-1">
+                  <p className="text-sm font-semibold text-gray-900 line-clamp-1">
                     {rejectModal.title}
                   </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500">
                     by{" "}
                     {rejectModal.ownerId?.name || rejectModal.ownerInfo?.name}
                   </p>
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Rejection Reason *{" "}
                     <span className="text-gray-400 font-normal">
                       (min 10 characters)
@@ -486,10 +510,10 @@ export default function AdminPropertiesClient() {
                     placeholder="Explain why this property is being rejected. Be specific so the owner can improve their listing..."
                     value={rejectReason}
                     onChange={(e) => setRejectReason(e.target.value)}
-                    className={`input-base resize-none ${
+                    className={`w-full px-4 py-2.5 rounded-xl border bg-white text-gray-900 placeholder-gray-400 text-sm outline-none focus:ring-2 focus:ring-blue-100 transition-all resize-none ${
                       rejectReason.length > 0 && rejectReason.length < 10
-                        ? "border-red-400"
-                        : ""
+                        ? "border-red-400 focus:border-red-400"
+                        : "border-gray-200 focus:border-blue-400"
                     }`}
                   />
                   <div className="flex justify-between mt-1">
@@ -505,28 +529,29 @@ export default function AdminPropertiesClient() {
                     </span>
                   </div>
                 </div>
-
-                <div className="p-3 rounded-xl bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-800">
-                  <p className="text-xs text-orange-700 dark:text-orange-400">
-                    The owner will be able to see this feedback and update
-                    their listing accordingly.
+                <div className="p-3 rounded-xl bg-orange-50 border border-orange-100">
+                  <p className="text-xs text-orange-700">
+                    The owner will be able to see this feedback and update their
+                    listing accordingly.
                   </p>
                 </div>
               </div>
             )}
           </ModalBody>
-          <ModalFooter className="border-t border-gray-100 dark:border-gray-800 pt-4">
-            <Button type="button"
+          <ModalFooter className="border-t border-gray-100 pt-4">
+            <Button
+              type="button"
               variant="bordered"
               onPress={() => {
                 setRejectModal(null);
                 setRejectReason("");
               }}
-              className="font-semibold"
+              className="font-semibold border-gray-200 text-gray-600"
             >
               Cancel
             </Button>
-            <Button type="button"
+            <Button
+              type="button"
               color="warning"
               isLoading={!!actionLoading}
               isDisabled={rejectReason.trim().length < 10}
@@ -539,42 +564,43 @@ export default function AdminPropertiesClient() {
         </ModalContent>
       </Modal>
 
-      {/* Delete Confirm Modal */}
+      {/* Delete Modal */}
       <Modal
         isOpen={!!deleteModal}
         onClose={() => setDeleteModal(null)}
         size="sm"
-        classNames={{ backdrop: "backdrop-blur-sm", base: "card-base" }}
+        classNames={{
+          backdrop: "backdrop-blur-sm",
+          base: "bg-white shadow-xl rounded-2xl",
+        }}
       >
         <ModalContent>
-          <ModalHeader className="font-heading text-lg text-red-600 dark:text-red-400">
+          <ModalHeader className="font-heading text-lg text-red-600">
             Delete Property
           </ModalHeader>
           <ModalBody>
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-xl bg-red-50 dark:bg-red-900/20 flex-shrink-0">
+              <div className="p-2 rounded-xl bg-red-50 flex-shrink-0">
                 <TbAlertTriangle className="w-5 h-5 text-red-500" />
               </div>
-              <div>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
-                  Are you sure you want to permanently delete{" "}
-                  <strong className="text-gray-900 dark:text-white">
-                    {deleteModal?.title}
-                  </strong>
-                  ? This cannot be undone.
-                </p>
-              </div>
+              <p className="text-sm text-gray-700">
+                Are you sure you want to permanently delete{" "}
+                <strong className="text-gray-900">{deleteModal?.title}</strong>?
+                This cannot be undone.
+              </p>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button type="button"
+            <Button
+              type="button"
               variant="bordered"
               onPress={() => setDeleteModal(null)}
-              className="font-semibold"
+              className="font-semibold border-gray-200 text-gray-600"
             >
               Cancel
             </Button>
-            <Button type="button"
+            <Button
+              type="button"
               color="danger"
               isLoading={deleteLoading}
               onPress={handleDelete}

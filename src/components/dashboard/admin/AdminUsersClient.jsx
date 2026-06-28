@@ -59,23 +59,20 @@ export default function AdminUsersClient() {
   const [newRole, setNewRole] = useState("");
   const [roleLoading, setRoleLoading] = useState(false);
 
-  const fetchUsers = useCallback(
-    async (p = 1, s = "") => {
-      setLoading(true);
-      try {
-        const params = new URLSearchParams({ page: p, limit: 10 });
-        if (s) params.append("search", s);
-        const res = await axiosInstance.get(`/users?${params}`);
-        setUsers(res.data.data.users || []);
-        setPagination(res.data.data.pagination);
-      } catch {
-        toast.error("Failed to load users");
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const fetchUsers = useCallback(async (p = 1, s = "") => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({ page: p, limit: 10 });
+      if (s) params.append("search", s);
+      const res = await axiosInstance.get(`/users?${params}`);
+      setUsers(res.data.data.users || []);
+      setPagination(res.data.data.pagination);
+    } catch {
+      toast.error("Failed to load users");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchUsers(page, search);
@@ -86,7 +83,7 @@ export default function AdminUsersClient() {
       setSearch(val);
       setPage(1);
     }, 500),
-    []
+    [],
   );
 
   const handleSearchInput = (e) => {
@@ -115,12 +112,10 @@ export default function AdminUsersClient() {
       });
       setUsers((prev) =>
         prev.map((u) =>
-          u._id === roleModal._id ? { ...u, role: newRole } : u
-        )
+          u._id === roleModal._id ? { ...u, role: newRole } : u,
+        ),
       );
-      toast.success(
-        `${roleModal.name}'s role changed to ${newRole}`
-      );
+      toast.success(`${roleModal.name}'s role changed to ${newRole}`);
       setRoleModal(null);
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to update role");
@@ -144,7 +139,7 @@ export default function AdminUsersClient() {
           size="sm"
           startContent={<TbRefresh className="w-4 h-4" />}
           onPress={() => fetchUsers(page, search)}
-          className="font-medium"
+          className="font-medium bg-green-600"
         >
           Refresh
         </Button>
@@ -189,7 +184,7 @@ export default function AdminUsersClient() {
                       >
                         {h}
                       </th>
-                    )
+                    ),
                   )}
                 </tr>
               </thead>
@@ -215,16 +210,21 @@ export default function AdminUsersClient() {
             <table className="w-full">
               <thead className="table-head">
                 <tr>
-                  {["User", "Email", "Role", "Joined", "Auth Type", "Actions"].map(
-                    (h) => (
-                      <th
-                        key={h}
-                        className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap"
-                      >
-                        {h}
-                      </th>
-                    )
-                  )}
+                  {[
+                    "User",
+                    "Email",
+                    "Role",
+                    "Joined",
+                    "Auth Type",
+                    "Actions",
+                  ].map((h) => (
+                    <th
+                      key={h}
+                      className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap"
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800">
@@ -333,10 +333,7 @@ export default function AdminUsersClient() {
               Showing{" "}
               <span className="font-medium text-gray-900 dark:text-white">
                 {(pagination.page - 1) * pagination.limit + 1}–
-                {Math.min(
-                  pagination.page * pagination.limit,
-                  pagination.total
-                )}
+                {Math.min(pagination.page * pagination.limit, pagination.total)}
               </span>{" "}
               of{" "}
               <span className="font-medium text-gray-900 dark:text-white">

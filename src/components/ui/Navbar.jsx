@@ -200,8 +200,7 @@ export default function Navbar() {
                   <Link href="/login">
                     <Button
                       variant="light"
-                      size="sm"
-                      startContent={<TbLogin className="w-4 h-4" />}
+                      size="md"
                       className="font-medium text-gray-300"
                     >
                       Login
@@ -209,8 +208,7 @@ export default function Navbar() {
                   </Link>
                   <Link href="/register">
                     <Button
-                      size="sm"
-                      startContent={<TbUserPlus className="w-4 h-4" />}
+                      size="md"
                       className="font-semibold btn-gradient text-white"
                     >
                       Register
