@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Button, Select, SelectItem } from "@heroui/react";
+import { Button } from "@heroui/react";
 import {
   TbSearch,
   TbMapPin,
@@ -17,14 +17,8 @@ import {
 } from "react-icons/tb";
 
 const propertyTypes = [
-  "Apartment",
-  "House",
-  "Villa",
-  "Studio",
-  "Condo",
-  "Townhouse",
-  "Office",
-  "Warehouse",
+  "Apartment", "House", "Villa", "Studio",
+  "Condo", "Townhouse", "Office", "Warehouse",
 ];
 
 const stats = [
@@ -45,61 +39,70 @@ export default function Banner() {
   const handleSearch = (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (searchData.location)
-      params.append("location", searchData.location);
-    if (searchData.propertyType)
-      params.append("propertyType", searchData.propertyType);
-    if (searchData.minPrice)
-      params.append("minPrice", searchData.minPrice);
-    if (searchData.maxPrice)
-      params.append("maxPrice", searchData.maxPrice);
+    if (searchData.location) params.append("location", searchData.location);
+    if (searchData.propertyType) params.append("propertyType", searchData.propertyType);
+    if (searchData.minPrice) params.append("minPrice", searchData.minPrice);
+    if (searchData.maxPrice) params.append("maxPrice", searchData.maxPrice);
     router.push(`/properties?${params.toString()}`);
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#f8f7ff]">
+      
+      {/* Background Image with light overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80')`,
+          backgroundImage: `url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80')`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/70 to-gray-950/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent" />
+        {/* Left-to-right fade: opaque white on left, transparent on right */}
+        <div
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80')`,
+  }}
+>
+  {/* Left: solid white so text is readable, fades to transparent on right */}
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(to right, rgba(248,247,255,1) 0%, rgba(248,247,255,0.95) 30%, rgba(248,247,255,0.6) 55%, rgba(248,247,255,0) 100%)",
+    }}
+  />
+</div>
+        {/* Bottom fade */}
+        <div className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, rgba(248,247,255,0.7) 0%, transparent 40%)"
+          }}
+        />
       </div>
 
-      {/* Animated background shapes */}
+      {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.08, 0.05] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.05, 0.09, 0.05] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-blue-500"
+          className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-purple-400"
         />
         <motion.div
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.05, 0.08, 0.05] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-purple-500"
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.05, 0.09, 0.05] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-indigo-400"
         />
       </div>
 
       <div className="relative z-10 section-container w-full py-24 md:py-32">
         <div className="max-w-4xl">
+
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-medium mb-6">
-              <TbStar className="w-4 h-4" />
-              #1 Property Rental Platform
-            </span>
           </motion.div>
 
           {/* Heading */}
@@ -107,12 +110,12 @@ export default function Banner() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight font-heading mb-6"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight font-heading mb-6"
           >
             Find Your{" "}
-            <span className="gradient-text">Perfect</span>
+            <span className="gradient-text">Dream</span>
             <br />
-            Home Today
+            Home and Book now
           </motion.h1>
 
           {/* Description */}
@@ -120,11 +123,10 @@ export default function Banner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg sm:text-xl text-gray-700 mb-10 max-w-2xl leading-relaxed"
           >
-            Discover thousands of verified rental properties across the
-            country. From cozy studios to luxury villas — your dream home
-            is just a search away.
+            Find thousands of verified rental properties across Bangladesh.
+            From budget-friendly studios to premium villas your ideal home is just one click away.
           </motion.p>
 
           {/* Search Form */}
@@ -135,99 +137,80 @@ export default function Banner() {
           >
             <form
               onSubmit={handleSearch}
-              className="bg-white dark:bg-gray-900 rounded-2xl p-4 shadow-2xl border border-gray-100 dark:border-gray-700"
+              className="bg-white rounded-2xl p-5 border border-indigo-100"
+              style={{ boxShadow: "0 4px 40px rgba(108,99,255,0.10)" }}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
                 {/* Location */}
-                <div className="relative">
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 ml-1">
-                    Location
+                <div>
+                  <label className="block text-xs font-bold text-gray-400 mb-1.5 ml-1 tracking-wide">
+                    LOCATION
                   </label>
                   <div className="relative">
-                    <TbMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <TbMapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 z-10" />
                     <input
                       type="text"
                       placeholder="City, neighborhood..."
                       value={searchData.location}
-                      onChange={(e) =>
-                        setSearchData((p) => ({
-                          ...p,
-                          location: e.target.value,
-                        }))
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onChange={(e) => setSearchData((p) => ({ ...p, location: e.target.value }))}
+                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                     />
                   </div>
                 </div>
 
                 {/* Property Type */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 ml-1">
-                    Property Type
+                  <label className="block text-xs font-bold text-gray-400 mb-1.5 ml-1 tracking-wide">
+                    PROPERTY TYPE
                   </label>
                   <div className="relative">
-                    <TbBuildingSkyscraper className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <TbBuildingSkyscraper className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 z-10" />
                     <select
                       value={searchData.propertyType}
-                      onChange={(e) =>
-                        setSearchData((p) => ({
-                          ...p,
-                          propertyType: e.target.value,
-                        }))
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                      onChange={(e) => setSearchData((p) => ({ ...p, propertyType: e.target.value }))}
+                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 appearance-none"
                     >
                       <option value="">All Types</option>
                       {propertyTypes.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
+                        <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
                   </div>
                 </div>
 
-                {/* Price Range */}
+                {/* Min Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 ml-1">
-                    Min Price
+                  <label className="block text-xs font-bold text-gray-400 mb-1.5 ml-1 tracking-wide">
+                    MIN PRICE
                   </label>
                   <div className="relative">
-                    <TbCurrencyDollar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <TbCurrencyDollar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 z-10" />
                     <input
                       type="number"
                       placeholder="Min rent"
                       min="0"
                       value={searchData.minPrice}
-                      onChange={(e) =>
-                        setSearchData((p) => ({
-                          ...p,
-                          minPrice: e.target.value,
-                        }))
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onChange={(e) => setSearchData((p) => ({ ...p, minPrice: e.target.value }))}
+                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                     />
                   </div>
                 </div>
 
+                {/* Max Price */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 ml-1">
-                    Max Price
+                  <label className="block text-xs font-bold text-gray-400 mb-1.5 ml-1 tracking-wide">
+                    MAX PRICE
                   </label>
                   <div className="relative">
-                    <TbCurrencyDollar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+                    <TbCurrencyDollar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 z-10" />
                     <input
                       type="number"
                       placeholder="Max rent"
                       min="0"
                       value={searchData.maxPrice}
-                      onChange={(e) =>
-                        setSearchData((p) => ({
-                          ...p,
-                          maxPrice: e.target.value,
-                        }))
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onChange={(e) => setSearchData((p) => ({ ...p, maxPrice: e.target.value }))}
+                      className="w-full pl-9 pr-3 py-2.5 text-sm rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -248,46 +231,8 @@ export default function Banner() {
               </div>
             </form>
           </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-6 mt-10"
-          >
-            {stats.map((stat, i) => (
-              <div key={i} className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-white/10 border border-white/20">
-                  <stat.icon className="w-4 h-4 text-white" />
-                </div>
-                <div>
-                  <p className="text-white font-bold text-lg leading-tight font-heading">
-                    {stat.value}
-                  </p>
-                  <p className="text-gray-400 text-xs">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
-      >
-        <span className="text-xs font-medium">Scroll to explore</span>
-        <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-1.5">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-1.5 bg-white/60 rounded-full"
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }
